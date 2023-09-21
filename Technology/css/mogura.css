@@ -1,0 +1,17 @@
+#label {
+    color: red;
+    font-size: 36px;
+}
+#field td {
+    width: 70px;
+    height: 70px;
+    background-color: green;
+    background-image: url('../images/mogura-tile.png');
+    background-size: contain;
+}
+#field .mogura {
+    background-image: url('../images/mogura.png');
+}
+#field .mogura-hit {
+    background-image: url('../images/mogura-hit.png');
+}

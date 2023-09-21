@@ -1,0 +1,8 @@
+#box .player {
+    width: 70px;
+    height: 70px;
+    float: left;
+    background-color: green;
+    background-image: url('../images/player.png');
+    background-size: contain;
+}
