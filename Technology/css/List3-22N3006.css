@@ -1,0 +1,23 @@
+h2 {
+    text-align: left;
+    color: blue;
+}
+
+td{
+    color: gray;
+    font-size: 28px;
+    text-align: center;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #dddddd;
+    width: 50px;
+}
+
+#img_size{
+    width: 400px;
+    height: 300px;
+}
+
+.sunday{color: red;}
+.saturday{color: blue;}
+.holiday{color: red;}
