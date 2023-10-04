@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>サッカーフィールド</title>
+        <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+
+            
+            $(function(){
+                var canvas = $("#main");
+                var ctx = canvas[0].getContext("2d");
+
+                ctx.strokeStyle= "white";
+                ctx.fillStyle="green";
+                ctx.lineWidth=3;
+
+                ctx.strokeRect(200,200,600,300);
+
+                ctx.fillRect(200,200,600,300);
+
+
+                ctx.strokeRect(200,300,50,100);
+                ctx.strokeRect(750,300,50,100);
+
+                ctx.strokeStyle="white";
+                ctx.lineWidth=3;
+                ctx.beginPath();
+                ctx.moveTo(500,200);
+                ctx.lineTo(500,500);
+                ctx.stroke();
+
+                ctx.strokeStyle="white";
+                ctx.beginPath();
+                ctx.arc(500,350,50,0,Math.PI*2);
+                ctx.closePath();
+                ctx.stroke();
+
+
+            });
+        </script>
+    </head>
+    <body>
+        <canvas id="main" width="1000" height="700"></canvas>
+    </body>
+</html>
