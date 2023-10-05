@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>課題５</title>
+        <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+
+            
+            $(function(){
+
+                var aa, lp, n, bb=Math.PI;
+
+                n=0;
+                for(lp = 1; lp <= 1000; lp++){
+                    n += 1/(lp*lp);
+                }
+
+                aa=Math.sqrt(6*n);
+
+                
+                
+
+
+
+                var canvas = $("#main");
+                var ctx = canvas[0].getContext("2d");
+
+                ctx.strokeStyle= "#000000";
+                ctx.fillStyle="#000000";
+                ctx.font = "39px 'Yu Gothic'";
+
+                ctx.fillText(aa,100,100);
+                ctx.fillText(bb,100,200);
+
+            
+
+            })
+        </script>
+    </head>
+    <body>
+        <canvas id="main" width="1000" height="700"></canvas>
+    </body>
+</html>
