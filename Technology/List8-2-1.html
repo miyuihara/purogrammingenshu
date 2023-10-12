@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>モグラ叩き</title>
+        <link rel="stylesheet" type="text/css" href="css/mogura.css">
+        <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            "use strict";
+            var tiles = [];
+
+            $(function(){
+                var table = $("#field")[0];
+
+                for(var i = 0; i < 4; i++) {
+                    var tr = document.createElement("tr");
+                    for(var j = 0; j < 4; j++) {
+                        var td = document.createElement("td");
+                        var n = i * 4 + j;
+                        td.className = "tile";
+
+                        tr.appendChild(td);
+                        tiles.push(td);
+
+                    }
+                    table.appendChild(tr);
+                }
+
+                setInterval(popup,1000);
+            });
+
+            function popup(){
+                for(var i = 0; i < tiles.length; i++) {
+                    tiles[i].className = "tile";
+                }
+                var number = Math.floor(Math.random() * 16);
+                tiles[number].className = "mogura";
+            }
+        </script>
+    </head>
+    <body>
+        <table id="field"></table>
+    </body>
+</html>
