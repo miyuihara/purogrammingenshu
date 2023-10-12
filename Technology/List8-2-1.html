@@ -9,6 +9,7 @@
         <script type="text/javascript">
             "use strict";
             var tiles = [];
+            var score = 0;
 
             $(function(){
                 var table = $("#field")[0];
@@ -19,7 +20,7 @@
                         var td = document.createElement("td");
                         var n = i * 4 + j;
                         td.className = "tile";
-
+                        $(td).click(tileClick);
                         tr.appendChild(td);
                         tiles.push(td);
 
@@ -29,6 +30,18 @@
 
                 setInterval(popup,1000);
             });
+
+            function tileClick(e) {
+                var td = $(this)[0];
+                var label = $("#label");
+
+                if(td.className == "mogura"){
+                    td.className = "mogura-hit";
+                    score += 10;
+                    label.text(score + 'ポイント');
+                    $('#pon')[0].play();
+                }
+            }
 
             function popup(){
                 for(var i = 0; i < tiles.length; i++) {
@@ -41,5 +54,10 @@
     </head>
     <body>
         <table id="field"></table>
+        <p id="label"></p>
+        <audio id="pon" style="display: none;">
+          <source src="sound/button51.mp3" type="audio/mp3">
+        </audio>
+        
     </body>
 </html>
