@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>サッカーフィールド</title>
+        <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            "use strict";
+            var ctx;
+            var player;
+            var x0 = 100; 
+            var y0 = 100;
+
+            $(function(){
+                var canvas = $("#main");
+                ctx = canvas[0].getContext("2d");
+                player = $("#player")[0];
+
+
+                ctx.strokeStyle = "white";
+                ctx.fillStyle = "green";
+                ctx.lineWidth = 3;
+                ctx.strokeRect(0,0,600,300);
+                ctx.fillRect(0,0,600,300);
+
+                ctx.strokeRect(0,100,50,100);
+
+                ctx.strokeRect(550,100,50,100);
+
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(300,0);
+                ctx.lineTo(300,300);
+                ctx.stroke();
+
+                ctx.strokeStyle = "white";
+                ctx.beginPath();
+                ctx.arc(300,150,50,0,Math.PI*2);
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.drawImage(player,x0,y0,60,60);
+
+                $(window).keydown(OnMyKeyDown);
+
+            });
+            function OnMyKeyDown(evt){
+                var key = evt.keyCode;
+                var dx = 30; 
+                var dy = 30;
+
+                if(x0 >= 30 && key == 37){
+                        x0 -= dx;
+                }
+                else if(y0 >= 30 && key == 38){
+                        y0 -= dy;
+                }
+                else if(x0 <= 510 && key == 39){
+                        x0 += dx;
+                }
+                else if(y0 <= 210 && key == 40){
+                        y0 += dy;
+                }
+                else if(key==8){
+                        x0 = 100;
+                        y0 = 100;
+                }
+
+                ctx.clearRect(0, 0, 1000, 500);
+
+
+                //サッカーフィールド
+                ctx.strokeStyle = "white";
+                ctx.fillStyle = "green";
+                ctx.lineWidth = 3;
+                ctx.strokeRect(0,0,600,300);
+                ctx.fillRect(0,0,600,300);
+
+                //ゴールエリア
+                ctx.strokeRect(0,100,50,100);
+                ctx.strokeRect(550,100,50,100);
+
+                //センターライン
+                ctx.strokeStyle = "white";
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(300,0);
+                ctx.lineTo(300,300);
+                ctx.stroke();
+
+                //センターサークル
+                ctx.strokeStyle = "white";
+                ctx.beginPath();
+                ctx.arc(300,150,50,0,Math.PI*2);
+                ctx.closePath();
+                ctx.stroke();
+
+                //プレイヤー
+                ctx.drawImage(player,x0,y0,60,60);
+
+              
+            }
+        </script>
+    </head>
+    <body>
+        <canvas id="main" width="1000" height="700"></canvas>
+        <img id="player" src="images/player.png" style="display:none">
+    </body>
+</html>
