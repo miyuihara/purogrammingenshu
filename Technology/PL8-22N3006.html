@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>課題８</title>
+        <link rel="stylesheet" type="text/css" href="css/mogura.css">
+        <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            "use strict";
+            var tiles = [];
+            var score = 100;
+            var ctx;
+            var count;
+            var onoff;
+
+            $(function(){
+            var label = $("#label2");
+            var canvas = $("#main");            
+            ctx = canvas[0].getContext("2d");
+            count = 60;  
+            onoff = true; 
+
+            setInterval(onCount, 1000);     
+            label.text("　　残り時間" + 60);       
+        });
+
+            function onCount(){
+                var label = $("#label2");
+                var t;
+
+                if (score > 10 && count > 0){
+                    count--;
+                    t="  残り時間" + count ;
+                    label.text(t);
+                }
+                else if(count == 0){
+                    onoff = false;
+                    t="  ゲーム終了";
+                    label.text(t);
+                }
+
+                ctx.font = "36px 'Yu Gothic'";
+                ctx.fillStyle = "#ff0000";
+
+            }
+
+
+            $(function(){
+                var table = $("#field")[0];
+                var label = $("#label");
+
+                for(var i = 0; i < 4; i++) {
+                    var tr = document.createElement("tr");
+                    for(var j = 0; j < 4; j++) {
+                        var td = document.createElement("td");
+                        var n = i * 4 + j;
+                        td.className = "tile";
+                        $(td).click(tileClick);
+                        tr.appendChild(td);
+                        tiles.push(td);
+
+                    }
+                    table.appendChild(tr);
+                }
+
+                setInterval(popup,1000);
+                label.text(100+'ポイント');
+            });
+
+            function tileClick(e) {
+                var td = $(this)[0];
+                var label = $("#label");
+
+                if(td.className == "mogura" && score > 10 && count > 0){
+                    td.className = "mogura-hit";
+                    score += 10;
+                    label.text(score + 'ポイント');
+                    $('#pon')[0].play();
+                }
+                else if(td.className == "tile" && score > 10 && count > 0){
+                    score -= 10;
+                    label.text(score + 'ポイント');
+                }
+
+                else if(score == 10){
+                    label.text('GAMEORVER');
+                }
+                if (score < 10){
+                    onoff = false;
+                    label.text(t);
+                }
+            }
+            
+            
+
+            function popup(){
+                for(var i = 0; i < tiles.length; i++) {
+                    tiles[i].className = "tile";
+                }
+                var number = Math.floor(Math.random() * 16);
+                tiles[number].className = "mogura";
+            }
+        </script>
+    </head>
+    <body>
+        <canvas id="main" width="0" height="0"></canvas><br/>
+        <table id="field"></table>
+        <dr id="label"></dr>
+        <dr id="label2"></dr>
+        <td id="main"></td>
+        <audio id="pon" style="display: none;">
+          <source src="sound/button51.mp3" type="audio/mp3">
+        </audio>
+        
+    </body>
+</html>

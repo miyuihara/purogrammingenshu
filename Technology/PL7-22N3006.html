@@ -15,33 +15,42 @@
                 ctx = canvas[0].getContext("2d");
 
                 var width = canvas[0].width;
-                var heigh = canvas[0].height;
+                var height = canvas[0].height;
 
-                var wid = new Array()
+                var dx = new Array(100); //長方形の横の長さ
+                var dy = new Array(100);
+                var x = new Array(100); //長方形の始点
+                var y = new Array(100);
+                var iro_R = new Array(100);
+                var iro_G = new Array(100);
+                var iro_B = new Array(100);
 
-                var loc_x = new Array(100);
-                var loc_y = new Array(100);
-
-                for(var loop=0; loop<100; loop++){
-                    radi[loop] = Math.floor(10 + Math.random() * 40);
-                    loc_x[loop] = Math.floor(Math.random() * width);
-                    loc_y[loop] = Math.floor(Math.random()*heigh)
+                for(var loop=0; loop<200; loop++){
+                    dx[loop] = Math.floor( 10 + Math.random()*80 );
+                    dy[loop] = Math.floor( 10 + Math.random() * 80 );
+                    x[loop] = Math.floor(Math.random() * width );
+                    y[loop] = Math.floor(Math.random() * height );
                 }
 
-                ctx.fillStyle = "#F7AFC3";
-                ctx.globalAlpha = 0.5;
+                ctx.fillStyle ="#EB7A77";
 
-                for(var loop=0; loop<100; loop++){
+                ctx.globalAlpha = 0.5;
+                //ctx.lineWidth = 1;
+
+                for(var loop=0; loop <200; loop++){
                     ctx.beginPath();
-                    ctx.arc(loc_x[loop],loc_y[loop], radi[loop], 0, Math.PI*2);
+                    ctx.fillRect(x[loop],y[loop],dx[loop],dy[loop],0);
                     ctx.closePath();
                     ctx.fill();
                 }
 
-            });
+            })
+
+
+                
         </script>
     </head>
     <body>
         <canvas id="main" width="1000" height="700"></canvas>
     </body>
-</html>
+</html>８８

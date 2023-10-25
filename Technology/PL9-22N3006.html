@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>課題9</title>
+        <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            "use strict";
+            var ctx;
+            var width, height;
+            var cirs = [];
+
+            function Circle(_locx, _locy, _radi, _velx, _vely, _color ){
+                this.locx = _locx;
+                this.locy = _locy;
+                this.radi = _radi;
+                this.velx = _velx;
+                this.vely = _vely;
+                this.color = _color;
+
+                this.update = function(){
+                    this.locx += this.velx;
+                    this.locy += this.vely;
+                }
+
+                this.draw = function(ctx){
+                    ctx.beginPath();
+                    ctx.arc(this.locx, this.locy, this.radi,0,Math.PI*2);
+                    ctx.fillStyle = this.color;
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                
+            }
+    
+
+            $(function(){
+                var canvas = $("#main");
+                ctx = canvas[0].getContext("2d");
+
+                width = canvas[0].width;
+                height = canvas[0].height;
+                ctx.fillStyle = "#1F3FFF"
+                ctx.globalAlpha = "0.5";
+                ctx.strokeStyle = "#000008";
+                ctx.lineWidth = 3;
+
+                for(var i = 0; i < 10; i++ ){
+                    var randomColor = getRandomColor();
+                    cirs[i] = new Circle(
+                        Math.floor(50 + Math.random() * (width-100)),
+                        Math.floor(50 + Math.random() * (height-100)),
+                        Math.floor(10 + 40 * Math.random() ),
+                        Math.floor(50 + Math.random() - 5),
+                        Math.floor(50 + Math.random() - 5),
+                        randomColor
+                    );
+                }
+
+                
+
+                setInterval(onDraw,1000/10);
+            });
+
+            function onDraw(){
+                ctx.clearRect(0,0,width,height);
+                ctx.strokeRect(0,0,width,height);
+
+                for(var i = 0; i < cirs.length; i++){
+                    cirs[i].update();
+                    var x = cirs[i].locx;
+                    var y = cirs[i].locy;
+                    var r = cirs[i].radi;
+
+                    if( x <= r || x >= width - r ){
+                        cirs[i].velx *= -1;
+                        cirs[i].color = getRandomColor();
+                    }
+                    if( y <= r || y >= height - r ){
+                        cirs[i].vely *= -1;
+                        cirs[i].color = getRandomColor();
+                    }
+
+                    cirs[i].draw(ctx);
+
+                }
+            }
+            function getRandomColor(){
+                    return "#" + (Math.random() * 0xFFFFFF << 0).toString(16);
+                }
+        </script>
+    </head>
+    <body>
+        <canvas id="main" width="1000" height="600"></canvas>
+    </body>
+</html>

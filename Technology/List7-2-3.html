@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>サッカーフィールド</title>
+        <script type="text/javascript" src="js/jquery-3.7.1.js">
+            "use strict";
+            var ctx;
+
+            $(function(){
+                var canvas = $("#main");
+                ctx = canvas[0].getContext("2d");
+
+                var width = canvas[0].width;
+                var heigh = canvas[0].height;
+
+                var radi = new Array(100)
+
+            });
+        </script>
+    </head>
+    <body>
+        <canvas id="main" width="1000" height="700"></canvas>
+        <img id="player" src="images/player.png" style="display:none">
+    </body>
+</html>
