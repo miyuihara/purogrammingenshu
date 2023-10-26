@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>課題10</title>
+        <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
+        <script type="text/javascript">
+            "use strict";
+            var ctx;
+            var width, height;
+            var cirs = [];
+
+            function Circle(_locx, _locy, _radi, _velx, _vely,amplitude, frequency ){
+                this.locx = _locx;
+                this.locy = _locy;
+                this.radi = _radi;
+                this.velx = _velx;
+                this.vely = _vely;
+                this.amplitude = amplitude; 
+                this.frequency = frequency; 
+                this.angle = Math.random() * Math.PI * 2;
+
+                this.update = function(acc,fric,fx,fy){
+                    this.locx += this.amplitude * Math.sin(this.angle); 
+                    this.angle += this.frequency;
+
+                    this.locy += this.vely;
+
+                    if (this.locy > height + this.radi) {
+                    this.locx = Math.floor(30 + Math.random() * (width - 60)); 
+                    this.locy = -this.radi;
+                    }
+                };
+
+                this.draw = function(ctx){
+                    ctx.beginPath();
+                    ctx.arc(this.locx, this.locy, this.radi,0,Math.PI*2);
+                    ctx.closePath();
+                    ctx.fill();
+                };
+                
+            }
+    
+
+            $(function(){
+                var canvas = $("#main");
+                ctx = canvas[0].getContext("2d");
+
+                width = canvas[0].width;
+                height = canvas[0].height;
+                ctx.fillStyle = "#FBABAF"
+                ctx.globalAlpha = "0.5";
+                ctx.strokeStyle = "#000008";
+                ctx.lineWidth = 3;
+
+                for(var i = 0; i < 200; i++ ){
+                    cirs[i] = new Circle(
+                        Math.floor(10 + Math.random() * (width-60)),
+                        Math.floor(10 + Math.random() * (height-100)),
+                        Math.floor(10 + 20 * Math.random() ),
+                        0,
+                        3,
+                        1,
+                        0.05
+                    );
+                }
+
+                
+
+                setInterval(onDraw,1000/100);
+            });
+
+            function onDraw(){
+                ctx.clearRect(0,0,width,height);
+                ctx.strokeRect(0,0,width,height);
+
+                for(var i = 0; i < cirs.length; i++){
+                    cirs[i].update();
+                    cirs[i].draw(ctx);
+
+                }
+            }
+    
+        </script>
+    </head>
+    <body>
+        <canvas id="main" width="1000" height="600"></canvas>
+    </body>
+</html>
